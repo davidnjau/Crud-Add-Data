@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -160,60 +160,28 @@
                 </tr>
                 </thead>
 
-                <script>
-
-                    // $.ajax({
-                    //     url: "http://192.168.81.34:8082/getPartData",
-                    //     type: 'GET',
-                    //     dataType: 'json', // added data type
-                    //     success: function(res) {
-                    //
-                    //         var partData = JSON.stringify(res);
-                    //         alert(partData)
-                    //
-                    //         for (i = 0; i < partData.length; ++i) {
-                    //             // do something with `substr[i]`
-                    //             var partHeading = partData[i]
-                    //         }
-                    //
-                    //         // var tab = document.getElementById("#data")
-                    //         // var tbl_body = document.createElement("tbody");
-                    //         // var odd_even = false;
-                    //         // $.each(partData, function() {
-                    //         //     var tbl_row = tbl_body.insertRow();
-                    //         //     tbl_row.className = odd_even ? "odd" : "even";
-                    //         //     $.each(this, function(k , v) {
-                    //         //         var cell = tbl_row.insertCell();
-                    //         //         cell.appendChild(document.createTextNode(v.toString()));
-                    //         //     });
-                    //         //     odd_even = !odd_even;
-                    //         // });
-                    //         // $("#data").append(tbl_body);
-                    //
-                    //
-                    //
-                    //     }
-                    // });
-
-
-                </script>
-
                 <tbody>
-                <!--/*@thymesVar id="planningAct" type="templates"*/-->
-                <tr th:each="planData : ${planningAct}">
-                    <!--/*@thymesVar id="id" type=""*/-->
-                    <td th:text="${planData.id}"/>
-                    <td th:text="${planData.partDescription}"/>
-                    <td th:text="${planData.partHeading}"/>
-                    <td th:text="${planData.partId}"/>
-                    <td>
-                        <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                    </td>
-                </tr>
+
+                    <th:block th:each="partDataList : ${partDataList}">
+
+                        <tr>
+
+                            <th th:utext="${partDataList.id}"></th>
+                            <th th:utext="${partDataList.part_heading}"></th>
+                            <th th:utext="${partDataList.part_description}"></th>
+                            <th th:utext="${partDataList.part_id}"></th>
+
+                            <td>
+                                <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+
+                    </th:block>
 
                 </tbody>
+
             </table>
             <div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>

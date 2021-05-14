@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,18 +25,56 @@ public class PartDataController {
     }
 
     @GetMapping("/getPartData")
-    public List<PartData> getPartData(Model model){
+    public ModelAndView getPartData(Model model){
 
-        model.addAttribute("planningAct", Arrays.asList(
-
-                new PartDetails("1", "lg", "ger", "I"),
-                new PartDetails("2", "GJH", "FH", "II")
-
-        ));
+        List<PartData> partDataList = partDataService.getPartData();
+        List<PartData> partDataArrayList = new ArrayList<>();
 
 
-        return partDataService.getPartData();
+        for (int i = 0; i<partDataList.size(); i++){
+
+            PartData partData = new PartData();
+
+            Long id = partDataList.get(i).getId();
+            String partHeading = partDataList.get(i).getPart_heading();
+            String partDescription = partDataList.get(i).getPart_description();
+            String partNumber = partDataList.get(i).getPart_id();
+
+            if (partDescription.length() > 400){
+                String partDescriptionFormat = partDescription.substring(0 , 400);
+                partData.setPart_description(partDescriptionFormat + "... ");
+            }else {
+                partData.setPart_description(partDescription);
+            }
+            partData.setId(id);
+            partData.setPart_heading(partHeading);
+            partData.setPart_id(partNumber);
+
+            partDataArrayList.add(partData);
+
+        }
+
+        model.addAttribute("partDataList", partDataArrayList);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("recorded");
+
+        return modelAndView;
     }
+
+//    @GetMapping("/getPartData")
+//    public List<PartData> getPartData(Model model){
+//
+//        model.addAttribute("planningAct", Arrays.asList(
+//
+//                new PartDetails("1", "lg", "ger", "I"),
+//                new PartDetails("2", "GJH", "FH", "II")
+//
+//        ));
+//
+//
+//        return partDataService.getPartData();
+//    }
 
 
 
