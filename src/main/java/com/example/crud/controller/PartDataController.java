@@ -1,7 +1,10 @@
 package com.example.crud.controller;
 
 import com.example.crud.classes.PartDetails;
+import com.example.crud.classes.SuccessPartData;
+import com.example.crud.classes.SuccessPartHeading;
 import com.example.crud.entity.PartData;
+import com.example.crud.entity.PartTitle;
 import com.example.crud.service.PartDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,20 +65,17 @@ public class PartDataController {
         return modelAndView;
     }
 
-//    @GetMapping("/getPartData")
-//    public List<PartData> getPartData(Model model){
-//
-//        model.addAttribute("planningAct", Arrays.asList(
-//
-//                new PartDetails("1", "lg", "ger", "I"),
-//                new PartDetails("2", "GJH", "FH", "II")
-//
-//        ));
-//
-//
-//        return partDataService.getPartData();
-//    }
+    @GetMapping("/getPartDataDetails")
+    public SuccessPartData fetchData(){
 
+        return partDataService.getPartData1();
+    }
+
+    @GetMapping("/getPartHeadingDetails")
+    public SuccessPartHeading fetchHeadingData(){
+
+        return partDataService.getPartHeading();
+    }
 
 
 }
