@@ -3,7 +3,7 @@ package com.example.crud.entity;
 import javax.persistence.*;
 
 @Entity
-public class FirstSchedule {
+public class ScheduleData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,12 +15,15 @@ public class FirstSchedule {
     @Column(name="content_description", length=512)
     private String content;
 
-    public FirstSchedule(String part, String content) {
+    private String schedule;
+
+    public ScheduleData(String part, String content, String schedule) {
         this.part = part;
         this.content = content;
+        this.schedule = schedule;
     }
 
-    public FirstSchedule() {
+    public ScheduleData() {
     }
 
     public long getId() {
@@ -45,5 +48,13 @@ public class FirstSchedule {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 }

@@ -1,0 +1,234 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>-->
+<script src="https://cdn.ckeditor.com/4.4.5.1/standard/ckeditor.js"></script>
+
+<style>
+
+  #snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #024434; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+</style>
+
+<div class="container">
+
+  <div id="signupbox" style="margin-top:50px" class="mainbox">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="panel-title">Add First and second Schedules</div>
+
+      </div>
+      <div class="panel-body" >
+
+          <div id="div_id1" class="form-group required">
+              <label   class="control-label col-md-4  requiredField"> Schedule <span class="asteriskField">*</span> </label>
+              <div class="controls col-md-8 "  style="margin-bottom: 10px">
+
+                  <label class="radio-inline"> <input type="radio" name="partSchedule" id="id_11" value="First Schedule" style="margin-bottom: 10px">First Schedule</label><br>
+                  <label class="radio-inline"> <input type="radio" name="partSchedule" id="id_22" value="Second Schedule" style="margin-bottom: 10px">Second Schedule</label><br>
+
+              </div>
+          </div>
+
+
+
+          <div id="div_id" class="firstSchedule form-group required">
+          <label   class="control-label col-md-4  requiredField"> First Schedule Part Details<span class="asteriskField">*</span> </label>
+          <div class="controls col-md-8 "  style="margin-bottom: 10px">
+            <label class="radio-inline"> <input type="radio" name="partI" id="id_1" value="I"  style="margin-bottom: 10px">Part I</label><br>
+            <label class="radio-inline"> <input type="radio" name="partI" id="id_2" value="II"  style="margin-bottom: 10px">Part II</label><br>
+            <label class="radio-inline"> <input type="radio" name="partI" id="id_3" value="III"  style="margin-bottom: 10px">Part III</label><br>
+            <label class="radio-inline"> <input type="radio" name="partI" id="id_4" value="IV"  style="margin-bottom: 10px">Part IV</label><br>
+          </div>
+        </div>
+
+          <div id="div_id2" class="secondSchedule form-group required">
+              <label   class="control-label col-md-4  requiredField"> Second Schedule Part Details<span class="asteriskField">*</span> </label>
+              <div class="controls col-md-8 "  style="margin-bottom: 10px">
+                  <label class="radio-inline"> <input type="radio" name="partII" id="id_5" value="A"  style="margin-bottom: 10px">Part A</label><br>
+                  <label class="radio-inline"> <input type="radio" name="partII" id="id_6" value="B"  style="margin-bottom: 10px">Part B</label><br>
+                  <label class="radio-inline"> <input type="radio" name="partII" id="id_7" value="C"  style="margin-bottom: 10px">Part C</label><br>
+              </div>
+          </div>
+          <div id="div_id_catagory" class="form-group required">
+          <label  class="control-label col-sm-4  requiredField"> Content<span class="asteriskField">*</span> </label>
+          <div class="col-sm-8" >
+            <label for="content"></label><textarea id="content" name="content" required></textarea>
+            <script type="text/javascript"></script>
+          </div>
+        </div>
+        <div class="aab controls col-md-4"></div>
+        <div class="controls col-md-8 " style="margin-top: 10px">
+          <button type="button" id="getData" value="getData" onclick="getData()">Submit</button>
+          <a type="button" href="http://192.168.81.34:8082/getPartData">View Saved Data</a>
+        </div>
+
+          <script>
+              $(document).ready(function(){
+                  $('.firstSchedule').hide();
+                  $('.secondSchedule').hide();
+
+                  $("input[id$='id_11']").click(function() {
+                      $('.firstSchedule').show();
+                      $('.secondSchedule').hide();
+                      $('input[name="partII"]').prop('checked', false);
+                  });
+
+                  $("input[id$='id_22']").click(function() {
+                      $('.firstSchedule').hide();
+                      $('.secondSchedule').show();
+                      $('input[name="partI"]').prop('checked', false);
+                  });
+              });
+
+          </script>
+
+        <div id="snackbar">Data has been saved successfully.</div>
+
+
+
+        <script>
+
+            CKEDITOR.replace('content');
+
+          function alertMessage() {
+            var x = document.getElementById("snackbar");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // location.reload();
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+          }
+
+          function getData(){
+            var radioButtonSchedule =$("input[name='partSchedule']:checked").val()
+
+            var radioButtonScheduleI =$("input[name='partI']:checked").val()
+            var radioButtonScheduleII =$("input[name='partII']:checked").val()
+
+
+            if (typeof radioButtonSchedule === 'undefined')  {
+              alert("Choose a schedule.")
+            }  else {
+
+                let partDetails = '';
+
+                if (radioButtonSchedule === 'First Schedule'){
+
+                    if (typeof radioButtonScheduleI === 'undefined'){
+                        alert("Choose a part detail for the first module.")
+                    }else {
+                        partDetails = radioButtonScheduleI
+                    }
+
+                }
+                if (radioButtonSchedule === 'Second Schedule'){
+                    if (typeof radioButtonScheduleII === 'undefined'){
+                        alert("Choose a part detail for the second module.")
+                    }else {
+                        partDetails = radioButtonScheduleII
+                    }
+
+                }
+
+
+
+                var content= CKEDITOR.instances['content'].getData();
+
+              if (content ){
+                //Submit the Data
+
+                var dataJson = {
+                  "content":content,
+                  "part":partDetails,
+                  "schedule":radioButtonSchedule,
+                };
+
+                var postData = JSON.stringify(dataJson);
+
+                  $.ajax({
+                  type: 'POST',
+                  url: 'http://192.168.81.34:8082/addFirstSecondSchedule',
+                  data: postData, // or JSON.stringify ({name: 'jonas'}),
+                  success: function(result) {
+                    // alert('success: ' + "");
+
+                    $('#content').val('');
+
+                    alertMessage()
+
+                  },
+                  error:function (error) {
+                    alert('error: ' + error);
+
+                  },
+                  contentType: "application/json",
+                  dataType: 'json'
+                });
+
+
+              }else {
+
+
+                if (!content)
+                  alert("The Part name cannot be empty.")
+              }
+
+
+
+            }
+
+
+          }
+
+        </script>
+
+      </div>
+    </div>
+  </div>
+</div>
