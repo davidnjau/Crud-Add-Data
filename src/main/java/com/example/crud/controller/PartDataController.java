@@ -4,8 +4,10 @@ import com.example.crud.classes.SuccessPartData;
 import com.example.crud.classes.SuccessPartHeading;
 import com.example.crud.entity.ScheduleData;
 import com.example.crud.entity.PartData;
+import com.example.crud.entity.ThirdScheduleData;
 import com.example.crud.service.PartDataService;
 import com.example.crud.service.impl.FirstSecondSecondScheduleServiceImpl;
+import com.example.crud.service.impl.ThirdScheduleServiceIml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class PartDataController {
 
     @Autowired
     private FirstSecondSecondScheduleServiceImpl firstSecondSecondScheduleService;
+
+    @Autowired
+    private ThirdScheduleServiceIml thirdScheduleServiceIml;
 
     @PostMapping("/addPartData")
     public ResponseEntity<?> addPartData(@RequestBody PartData partData){
@@ -96,6 +101,21 @@ public class PartDataController {
 
         return modelAndView;
 
+    }
+    /**
+     * Third Schedule
+     */
+    @PostMapping("/addThirdSchedule")
+    public ResponseEntity<?> addThirdSchedule(@RequestBody ThirdScheduleData thirdScheduleData){
+        return ResponseEntity.ok(thirdScheduleServiceIml.save(thirdScheduleData));
+    }
+    @GetMapping("/thirdSchedule")
+    public ModelAndView getThirdSchedule(){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("third_schedule");
+
+        return modelAndView;
     }
 
 
